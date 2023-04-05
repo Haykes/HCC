@@ -1,5 +1,5 @@
 const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database("./ma_base_de_donnees.sqlite");
+const db = new sqlite3.Database("./config/db.js");
 
 module.exports = {
   createAdherent: (adherent, callback) => {
