@@ -1,6 +1,6 @@
 // authController.js
 
-const authService = require("../services/authService");
+const authService = require("./authService");
 
 exports.register = (req, res) => {
   // Implémentez la logique d'inscription d'un nouvel utilisateur

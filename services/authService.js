@@ -1,11 +1,9 @@
-// authController.js
+// authService.js
 
-const authService = require("../services/authService");
-
-exports.register = (req, res) => {
+exports.register = async (userData) => {
   // Implémentez la logique d'inscription d'un nouvel utilisateur
 };
 
-exports.login = (req, res) => {
+exports.login = async (email, password) => {
   // Implémentez la logique d'authentification d'un utilisateur existant
 };

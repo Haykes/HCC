@@ -8,9 +8,9 @@ db.run(`CREATE TABLE Adherents (
   id_adherent INTEGER PRIMARY KEY,
   nom TEXT,
   prenom TEXT,
-  email TEXT,
+  email TEXT UNIQUE,
   mot_de_passe TEXT,
-  date_inscription DATE,
+  date_inscription DATETIME DEFAULT CURRENT_TIMESTAMP,
   role TEXT
 )`);
 
