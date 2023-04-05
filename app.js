@@ -1,18 +1,30 @@
 const express = require("express");
-const app = express();
-const cors = require("cors");
-const authRoutes = require("./routes/auth");
-const newsRoutes = require("./routes/news");
-const matchRoutes = require("./routes/match");
-const userRoutes = require("./routes/user");
+const sqlite3 = require("sqlite3").verbose();
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
-app.use(cors());
+const authRoutes = require("./routes/authRoutes");
+const adherentsRoutes = require("./routes/adherentsRoutes");
+const actualitesRoutes = require("./routes/actualitesRoutes");
+const matchsRoutes = require("./routes/matchsRoutes");
+
+const app = express();
 app.use(express.json());
 
-app.use("/auth", authRoutes);
-app.use("/news", newsRoutes);
-app.use("/match", matchRoutes);
-app.use("/user", userRoutes);
+const db = new sqlite3.Database(":memory:");
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Création des tables et ajout de données initiales
+db.serialize(function () {
+  // Ajoutez ici les instructions SQL pour créer vos tables
+  // Exemple : db.run("CREATE TABLE adherents (id INTEGER PRIMARY KEY AUTOINCREMENT, nom TEXT, prenom TEXT, ...)");
+});
+
+app.use("/auth", authRoutes);
+app.use("/adherents", adherentsRoutes);
+app.use("/actualites", actualitesRoutes);
+app.use("/matchs", matchsRoutes);
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Serveur démarre sur le port ${port}`);
+});
